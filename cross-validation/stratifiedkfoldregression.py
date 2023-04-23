@@ -17,6 +17,7 @@ def create_folds(data):
 
     # number of bin's bu Surge's rule
     num_bins = int(np.floor(1+np.log2(len(data))))
+    print(f"{num_bins}")
 
     #bin targets
     data.loc[:, "bins"] = pd.cut(data["target"],bins=num_bins, labels=False)

@@ -1,2 +1,4 @@
 *.mkv
 */.ipynb_checkpoints
+/data
+/processed

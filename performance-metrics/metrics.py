@@ -18,3 +18,12 @@ def accuracy(y_true, y_pred):
 
     # Return Accuracy
     return flag/len(y_true)
+
+def true_positive(y_true, y_pred):
+    """Function to calculate True Positive
+    """
+    tp = 0
+    for yt, yp in zip(y_true, y_pred):
+        if yt == 1 and yp ==1:
+            tp+=1
+    return tp

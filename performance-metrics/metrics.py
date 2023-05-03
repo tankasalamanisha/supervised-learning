@@ -94,3 +94,21 @@ def accuracy2(y_true,y_pred):
 
     accuracy_score = (tp+tn)/(tp+tn+fp+fn)
     return accuracy_score
+
+def precision(y_true,y_pred):
+    """Function to calculate precision from tp,fp.
+    """
+    tp=true_positive(y_true,y_pred)
+    fp= false_positive(y_true,y_pred)
+
+    precision= tp/(tp+fp)
+    return precision
+
+def recall(y_true, y_pred):
+    """Function to calculate recall from tp,fn.
+    """
+    tp = true_positive(y_true,y_pred)
+    fn = false_negative(y_true,y_pred)
+
+    recall = tp/(tp+fn)
+    return recall

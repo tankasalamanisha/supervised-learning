@@ -112,3 +112,32 @@ def recall(y_true, y_pred):
 
     recall = tp/(tp+fn)
     return recall
+
+def f1(y_true,y_pred):
+    """
+    Function to calculate f1 score.
+    """
+    p= precision(y_true,y_pred)
+    r= recall(y_true,y_pred)
+
+    score = 2*p*r/(p+r)
+
+    return score
+
+def tpr(y_true,y_pred):
+    """
+    Function to calculate tpr.
+    TPR is also known as sensitivity and is similar to recall.
+    """
+
+    return recall(y_true,y_pred)
+
+def fpr(y_true,y_pred):
+    """
+    Function to calculate fpr.
+    FPR is also known as specificity.
+    """
+    fp = false_positive(y_true, y_pred)
+    tn = true_negative(y_true, y_pred)
+
+    return fp/(tn+fp)

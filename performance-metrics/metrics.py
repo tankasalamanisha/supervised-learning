@@ -1,3 +1,4 @@
+import pandas as pd
 def accuracy(y_true, y_pred):
     """Function to compute accuracy.
     Args:
@@ -141,3 +142,22 @@ def fpr(y_true,y_pred):
     tn = true_negative(y_true, y_pred)
 
     return fp/(tn+fp)
+
+def auc_roc_curve(y_true:type,y_pred:list, thresholds:list):
+    # empty lists to store tpr and fpr values
+    tpr_list =[]
+    fpr_list =[]
+    for thresh in thresholds:
+        temp_pred = [1 if x>=thresh else 0 for x in y_pred]
+        # calculate tpr
+        temp_tpr = tpr(y_true, temp_pred)
+        # calculate fpr
+        temp_fpr = fpr(y_true, temp_pred)
+
+        # appending to our lists:
+        tpr_list.append(temp_tpr)
+        fpr_list.append(temp_fpr)
+
+    tpr_fpr_df = pd.DataFrame(data=dict(zip(['threshold','tpr','fpr'],[thresholds, tpr_list, fpr_list])))
+    
+    return tpr_fpr_df

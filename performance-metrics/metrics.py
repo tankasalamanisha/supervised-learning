@@ -179,3 +179,23 @@ def log_loss(y_true:list,y_pred:list)->float:
         loss.append(temp_loss)
     
     return np.mean(loss)
+
+def macro_precision(y_true:list,y_pred:list)->float:
+    """Function to calculate macro average precision: Calculate precision for all classes individually and avergae them"""
+    n_classes = len(np.unique(y_true))
+
+    precision = 0
+
+    for c_ in range(n_classes):
+        temp_true = [1 if p == c_ else 0 for p in y_true]
+        temp_pred = [1 if p == c_ else 0 for p in y_pred]
+
+        tp = true_positive(temp_true, temp_pred)
+        fp = false_positive(temp_true, temp_pred)
+
+        temp_precision = tp/(tp+fp)
+
+        precision+=temp_precision
+    
+    precision /=n_classes
+    return precision

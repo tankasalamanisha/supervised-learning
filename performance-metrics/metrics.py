@@ -199,3 +199,20 @@ def macro_precision(y_true:list,y_pred:list)->float:
     
     precision /=n_classes
     return precision
+
+def micro_precision(y_true:list,y_pred:list)->float:
+    """Function to calculate micro averaged precision: Class-wise true positive and false positive and the use that to calculate overall precision"""
+    n_classes = len(np.unique(y_true))
+
+    tp = 0
+    fp = 0
+
+    for c_ in range(n_classes):
+        temp_true = [1 if p== c_ else 0 for p in y_true]
+        temp_pred = [1 if p== c_ else 0 for p in y_pred]
+
+        tp+=true_positive(temp_true, temp_pred)
+        fp+=false_positive(temp_true, temp_pred)
+
+    precision = tp/(tp+fp)
+    return precision

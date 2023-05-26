@@ -163,7 +163,7 @@ def auc_roc_curve(y_true:list,y_pred:list, thresholds:list):
     
     return tpr_fpr_df
 
-def log_loss(y_true:list,y_pred:list)->np.float:
+def log_loss(y_true:list,y_pred:list)->float:
     """Function to calculate logloss"""
     epsilon = 1e-15
 

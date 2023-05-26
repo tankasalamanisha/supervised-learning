@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 def accuracy(y_true, y_pred):
     """Function to compute accuracy.
     Args:
@@ -143,7 +144,7 @@ def fpr(y_true,y_pred):
 
     return fp/(tn+fp)
 
-def auc_roc_curve(y_true:type,y_pred:list, thresholds:list):
+def auc_roc_curve(y_true:list,y_pred:list, thresholds:list):
     # empty lists to store tpr and fpr values
     tpr_list =[]
     fpr_list =[]
@@ -161,3 +162,20 @@ def auc_roc_curve(y_true:type,y_pred:list, thresholds:list):
     tpr_fpr_df = pd.DataFrame(data=dict(zip(['threshold','tpr','fpr'],[thresholds, tpr_list, fpr_list])))
     
     return tpr_fpr_df
+
+def log_loss(y_true:list,y_pred:list)->np.float:
+    """Function to calculate logloss"""
+    epsilon = 1e-15
+
+    loss =[]
+    for yt,yp in zip(y_true,y_pred):
+
+        yp = np.clip(yp, epsilon, 1-epsilon)
+
+        temp_loss = -1.0 * (
+            yt * np.log(yp)
+            + (1-yt)*np.log(1-yp)
+        )
+        loss.append(temp_loss)
+    
+    return np.mean(loss)

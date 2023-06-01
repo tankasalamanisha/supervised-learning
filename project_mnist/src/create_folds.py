@@ -5,9 +5,11 @@ if __name__=="__main__":
     data_dir = '../input/'
 
     df = pd.read_csv(f"{data_dir}mnist_train.csv")
+    
 
     df['kfold'] = -1
 
+    
     y = df.label.values
     
     kf = model_selection.StratifiedKFold(n_splits=5)

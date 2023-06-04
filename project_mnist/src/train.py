@@ -31,8 +31,8 @@ def run(fold:int):
     # joblib.dump(clf,f'../models/dt_{fold}.bin')
 
 if __name__ == "__main__":
-    # run(fold=0)
-    # run(fold=1)
+    run(fold=0)
+    run(fold=1)
     run(fold=2)
-    # run(fold=3)
-    # run(fold=4)
+    run(fold=3)
+    run(fold=4)

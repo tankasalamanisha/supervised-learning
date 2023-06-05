@@ -2,10 +2,14 @@ import joblib
 import pandas as pd
 from sklearn import metrics
 from sklearn import tree
+import config
+import os
+
+import argparse
 
 def run(fold:int):
     """Function that extracts, runs and evaluates the Decision Tree model"""
-    df = pd.read_csv("../input/mnist_train_folds.csv")
+    df = pd.read_csv(config.training_file)
 
     df_train = df[df.kfold != fold].reset_index(drop=True)
 
@@ -28,11 +32,19 @@ def run(fold:int):
 
     print(f"Fold {fold}:  Accuracy {accuracy}")
 
-    # joblib.dump(clf,f'../models/dt_{fold}.bin')
+    # joblib.dump(clf,os.path.join(config.model_output,f"dt_{fold}.bin"))
 
 if __name__ == "__main__":
-    run(fold=0)
-    run(fold=1)
-    run(fold=2)
-    run(fold=3)
-    run(fold=4)
+    # Initializing argument parser
+    parser = argparse.ArgumentParser()
+
+    # adding the different arguments we need and their type.
+    #currently, we only need fold
+
+    parser.add_argument("--fold",type=int,required=True)
+
+    # reading the arguments from the command line
+    args = parser.parse_args()
+
+    # running the fold specified in the argument parser
+    run(fold=args.fold)

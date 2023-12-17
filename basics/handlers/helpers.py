@@ -59,7 +59,7 @@ def gradtient_descent(x, y , w, b, learning_rate, epochs):
     m=len(x)
     costs = []
 
-    for epoch in epochs:
+    for epoch in range(epochs):
         y_pred = linear_regression_model(x, w, b)
         cost = mean_squared_error(y, y_pred)
         costs.append(cost)
